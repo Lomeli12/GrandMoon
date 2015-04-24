@@ -1,0 +1,15 @@
+[
+{
+  "modid": "grandmoon",
+  "name": "Grand Moon",
+  "description": "A combination of playing too much GTA V and nostalgia.",
+  "version" : "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.lomeli12.net/",
+  "updateUrl": "",
+  "authorList": ["Lomeli12"],
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
