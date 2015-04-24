@@ -17,17 +17,19 @@ public class EventHandler {
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent tickEvent) {
-        renderTick = tickEvent.renderTickTime;
-
+        if (tickEvent.phase == TickEvent.Phase.END)
+            renderTick = tickEvent.renderTickTime;
     }
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent playerTickEvent) {
-        EntityPlayer player = playerTickEvent.player;
-        if (!player.worldObj.isRemote && player.worldObj.isDaytime()) {
-            if (!hasReset) {
-                MoonClientHooks.INSTANCE.resetSize();
-                hasReset = true;
+        if (playerTickEvent.phase == TickEvent.Phase.END) {
+            EntityPlayer player = playerTickEvent.player;
+            if (!player.worldObj.isRemote && player.worldObj.isDaytime()) {
+                if (!hasReset) {
+                    MoonClientHooks.INSTANCE.resetSize();
+                    hasReset = true;
+                }
             }
         }
     }
@@ -43,7 +45,7 @@ public class EventHandler {
         }
     }
 
-    // ------- Copied from iChunUtil. Thanks iChun, I owe you 1 cupcake ------
+    // ------- Copied from iChunUtil. Thanks iChun, I owe you 1 chocolate cupcake ------
 
     private boolean isLookingAtMoon(World world, EntityLivingBase entity, float renderTick, boolean canLookThroughGlass) {
         if (entity.dimension == -1 || entity.dimension == 1)
