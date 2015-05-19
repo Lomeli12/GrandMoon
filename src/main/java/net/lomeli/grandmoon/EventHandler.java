@@ -17,13 +17,13 @@ public class EventHandler {
 
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent tickEvent) {
-        if (tickEvent.phase == TickEvent.Phase.END)
+        if (tickEvent.phase == TickEvent.Phase.START)
             renderTick = tickEvent.renderTickTime;
     }
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent playerTickEvent) {
-        if (playerTickEvent.phase == TickEvent.Phase.END) {
+        if (playerTickEvent.phase == TickEvent.Phase.END && playerTickEvent.player.worldObj.isRemote) {
             EntityPlayer player = playerTickEvent.player;
             if (!player.worldObj.isRemote && player.worldObj.isDaytime()) {
                 if (!hasReset) {
