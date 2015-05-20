@@ -23,13 +23,11 @@ public class EventHandler {
 
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent playerTickEvent) {
-        if (playerTickEvent.phase == TickEvent.Phase.END && playerTickEvent.player.worldObj.isRemote) {
+        if (playerTickEvent.phase == TickEvent.Phase.END) {
             EntityPlayer player = playerTickEvent.player;
-            if (!player.worldObj.isRemote && player.worldObj.isDaytime()) {
-                if (!hasReset) {
-                    MoonClientHooks.INSTANCE.resetSize();
-                    hasReset = true;
-                }
+            if (player.worldObj.isDaytime() && !hasReset) {
+                MoonClientHooks.INSTANCE.resetSize();
+                hasReset = true;
             }
         }
     }
