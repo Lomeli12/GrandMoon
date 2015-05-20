@@ -25,7 +25,7 @@ public class EventHandler {
     public void playerTick(TickEvent.PlayerTickEvent playerTickEvent) {
         if (playerTickEvent.phase == TickEvent.Phase.END) {
             EntityPlayer player = playerTickEvent.player;
-            if (player.worldObj.isDaytime() && !hasReset) {
+            if (player.worldObj.isRemote && player.worldObj.isDaytime() && !hasReset) {
                 MoonClientHooks.INSTANCE.resetSize();
                 hasReset = true;
             }
